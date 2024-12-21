@@ -7,7 +7,12 @@ class LoginRequest {
   @JsonKey(name: 'username')
   final String userName;
   final String password;
-  LoginRequest({required this.userName, required this.password});
+  final int expiresInMins;
+  LoginRequest({
+    required this.userName,
+    required this.password,
+    this.expiresInMins = 2,
+  });
 
   factory LoginRequest.fromJson(Map<String, dynamic> json) =>
       _$LoginRequestFromJson(json);

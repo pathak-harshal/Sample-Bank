@@ -6,6 +6,7 @@ class CommonTextField extends StatelessWidget {
   final String labelText;
   final Widget? prefixIcon;
   final TextInputType? keyboardType;
+  final bool isToAutoCorrect;
 
   const CommonTextField({
     super.key,
@@ -14,12 +15,14 @@ class CommonTextField extends StatelessWidget {
     this.prefixIcon,
     this.obscureText = false,
     this.keyboardType,
+    this.isToAutoCorrect = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       keyboardType: keyboardType,
+      autocorrect: isToAutoCorrect,
       controller: textEditingController,
       obscureText: obscureText,
       decoration: InputDecoration(

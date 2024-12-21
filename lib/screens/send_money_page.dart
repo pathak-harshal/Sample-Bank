@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bank/common_widgets/index.dart';
+import 'package:sample_bank/screens/index.dart';
+import 'package:sample_bank/stores/login_store.dart';
+import 'package:sample_bank/utility/locator.dart';
 
 class SendMoneyPage extends StatelessWidget {
+  final loginStore = locator<LoginStore>();
   final TextEditingController _amountController = TextEditingController();
 
   SendMoneyPage({super.key});
@@ -9,9 +13,19 @@ class SendMoneyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Send Money"),
-      ),
+      appBar: AppBar(title: const Text("Send Money"), actions: [
+        IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            loginStore.logout().then((_) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            });
+          },
+        ),
+      ]),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

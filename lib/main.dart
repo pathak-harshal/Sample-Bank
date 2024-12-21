@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sample_bank/screens/index.dart';
+import 'package:sample_bank/stores/login_store.dart';
 import 'package:sample_bank/theme/app_theme.dart';
+import 'package:sample_bank/utility/locator.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  setupLocator();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final loginStore = locator<LoginStore>();
 
   // This widget is the root of your application.
   @override
@@ -17,7 +22,21 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme, // Optional: Add a dark theme
       themeMode: ThemeMode.system, // Use system theme by default
-      home: LoginPage(),
+      home: FutureBuilder<bool>(
+          future: loginStore.checkLoginStatus(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasData) {
+              if (snapshot.data!) {
+                return SendMoneyPage();
+              } else {
+                return LoginPage();
+              }
+            } else {
+              return LoginPage();
+            }
+          }),
     );
   }
 }

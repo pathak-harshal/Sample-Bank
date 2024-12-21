@@ -25,4 +25,20 @@ class ApiRepository {
       throw Exception('Failed to login: ${response.body}');
     }
   }
+
+  Future<bool> checkLoginStatus({required String accessToken}) async {
+    final url = Uri.parse('$baseUrl/auth/me');
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization':
+            'Bearer $accessToken', // Include access token in Bearer header
+      },
+    );
+    if (response.statusCode == HttpStatus.ok) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
