@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:sample_bank/common_widgets/common_elevated_button.dart';
 import 'package:sample_bank/common_widgets/index.dart';
+import 'package:sample_bank/model/login_request.dart';
+import 'package:sample_bank/utility/api_repository.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
@@ -30,6 +33,7 @@ class LoginPage extends StatelessWidget {
               CommonTextField(
                 textEditingController: _usernameController,
                 labelText: "Username",
+                prefixIcon: const Icon(Icons.person),
               ),
               const SizedBox(height: 16),
               CommonTextField(
@@ -40,15 +44,23 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               CommonElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   final username = _usernameController.text;
                   final password = _passwordController.text;
 
                   // Simple login validation
                   if (username.isNotEmpty && password.isNotEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Logged in as $username")),
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   SnackBar(content: Text("Logged in as $username")),
+                    // );
+
+                    final response = await ApiRepository().login(
+                      loginRequest: LoginRequest(
+                        userName: 'emilys',
+                        password: 'emilyspass1',
+                      ),
                     );
+                    print(jsonEncode(response.toJson()));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(

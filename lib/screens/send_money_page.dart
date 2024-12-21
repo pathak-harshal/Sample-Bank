@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bank/common_widgets/common_elevated_button.dart';
 import 'package:sample_bank/common_widgets/index.dart';
 
 class SendMoneyPage extends StatelessWidget {
   final TextEditingController _amountController = TextEditingController();
+
+  SendMoneyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,9 @@ class SendMoneyPage extends StatelessWidget {
                   // Simulate sending money
                   showModalBottomSheet(
                     context: context,
-                    builder: (_) => _buildResultSheet(context, true),
+                    builder: (_) => const TransactionStatusBottomSheet(
+                      transactionStatus: true,
+                    ),
                   );
                 }
               },
@@ -53,42 +56,6 @@ class SendMoneyPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildResultSheet(BuildContext context, bool success) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      height: 200,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            success ? Icons.check_circle : Icons.error,
-            size: 60,
-            color: success ? Colors.green : Colors.red,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            success ? "Transaction Successful" : "Transaction Failed",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: success ? Colors.green : Colors.red,
-            ),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context); // Close the bottom sheet
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurpleAccent,
-            ),
-            child: const Text("OK"),
-          ),
-        ],
       ),
     );
   }
