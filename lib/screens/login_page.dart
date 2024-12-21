@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
           (LoginResponse? response) async {
             if (response != null) {
               // Navigate to the next screen
-              await Navigator.pushReplacement(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => SendMoneyPage()),
               );

@@ -11,7 +11,7 @@ class LoginRequest {
   LoginRequest({
     required this.userName,
     required this.password,
-    this.expiresInMins = 2,
+    this.expiresInMins = 60,
   });
 
   factory LoginRequest.fromJson(Map<String, dynamic> json) =>
