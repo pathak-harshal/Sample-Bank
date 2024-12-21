@@ -126,7 +126,7 @@ class SendMoneyPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const TransactionListPage()),
+                          builder: (context) => TransactionListPage()),
                     );
                   },
                   buttonText: "Transactions",
