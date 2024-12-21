@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sample_bank/common_widgets/common_elevated_button.dart';
+import 'package:sample_bank/common_widgets/index.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
@@ -25,30 +27,19 @@ class LoginPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  labelText: "Username",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  prefixIcon: const Icon(Icons.person),
-                ),
+              CommonTextField(
+                textEditingController: _usernameController,
+                labelText: "Username",
               ),
               const SizedBox(height: 16),
-              TextField(
-                controller: _passwordController,
+              CommonTextField(
+                textEditingController: _passwordController,
+                labelText: "Password",
+                prefixIcon: const Icon(Icons.lock),
                 obscureText: true,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  prefixIcon: const Icon(Icons.lock),
-                ),
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
+              CommonElevatedButton(
                 onPressed: () {
                   final username = _usernameController.text;
                   final password = _passwordController.text;
@@ -65,9 +56,7 @@ class LoginPage extends StatelessWidget {
                     );
                   }
                 },
-                child: const Text(
-                  "Login",
-                ),
+                buttonText: "Login",
               ),
             ],
           ),

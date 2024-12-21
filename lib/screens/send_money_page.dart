@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sample_bank/common_widgets/common_elevated_button.dart';
+import 'package:sample_bank/common_widgets/index.dart';
 
 class SendMoneyPage extends StatelessWidget {
   final TextEditingController _amountController = TextEditingController();
@@ -23,19 +25,14 @@ class SendMoneyPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: _amountController,
+            CommonTextField(
+              textEditingController: _amountController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: "Amount",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                prefixIcon: const Icon(Icons.attach_money),
-              ),
+              labelText: "Amount",
+              prefixIcon: const Icon(Icons.attach_money),
             ),
             const SizedBox(height: 24),
-            ElevatedButton(
+            CommonElevatedButton(
               onPressed: () {
                 final amountText = _amountController.text;
                 if (amountText.isEmpty || double.tryParse(amountText) == null) {
@@ -52,17 +49,7 @@ class SendMoneyPage extends StatelessWidget {
                   );
                 }
               },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                backgroundColor: Colors.deepPurpleAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text(
-                "Send",
-                style: TextStyle(fontSize: 16),
-              ),
+              buttonText: "Send",
             ),
           ],
         ),

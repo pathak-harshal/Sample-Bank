@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sample_bank/model/index.dart';
 
 class TransactionListPage extends StatelessWidget {
+  const TransactionListPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Transaction History"),
-        backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
